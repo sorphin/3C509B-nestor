@@ -28,5 +28,5 @@ clean:
 ## (See also: tasm/MAKEFILE)
 tasm/3C509.COM:
 	cd tasm; \
-	dosbox -c "MOUNT C: ." -c "C:" -c "MAKE" -c exit
+	dosbox -c "MOUNT C: ." -c "C:" -c "MAKE" -c "IF EXIST 3C509.COM EXIT"
 
