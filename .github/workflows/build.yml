@@ -1,0 +1,32 @@
+name: Build with Watcom wasm and Borland TASM
+on: [push]
+jobs:
+  build-it:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: open-watcom/setup-watcom@v1
+      with:
+        version: "1.9"
+        target:  "dos"
+    - name: Build with OpenWacom (wasm)
+      run: |
+        make
+    - name: Build with TurboAssembler (tasm)
+      run: |
+        sudo apt install dosbox rename
+        cd tasm
+        dosbox -c "MOUNT C: ." -c "C:" -c "MAKE" -c exit
+        rename 's/^/tasm-/' *LST *COM *MAP
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Development Build"
+        files: |
+          3c509.com
+          *.map
+          tasm/*.COM
+          tasm/*.MAP
+          tasm/*.LST
