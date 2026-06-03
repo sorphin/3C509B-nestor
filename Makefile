@@ -25,8 +25,8 @@ clean:
 
 ## Alternative compilation via DOSBOX and tasm/TASM.EXE.
 ## This should be byte-for-byte identical to Wacom's WASM.
-## (See also: tasm/MAKEFILE)
-tasm/3C509.COM:
+## (See also: tasm/MAKEFILE).
+tasm/3C509.COM: *.asm
 	cd tasm; \
 	dosbox -c "MOUNT C: ." -c "C:" -c "MAKE" -c "IF EXIST 3C509.COM EXIT"
 
