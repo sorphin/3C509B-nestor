@@ -23,7 +23,7 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
-        title: "Development Build"
+        title: "Development Build of ${{ GITHUB_REF_NAME }}"
         files: |
           3c509.com
           *.map
